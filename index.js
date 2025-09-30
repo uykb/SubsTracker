@@ -2348,12 +2348,8 @@ const configPage = `
         config.BARK_GROUP = document.getElementById('barkGroup').value.trim();
         config.BARK_URL = document.getElementById('barkUrl').value.trim();
 
-        if (!config.BARK_DEVICE_KEY) {
-          showToast('请先填写 Bark 设备密钥', 'warning');
-          button.innerHTML = originalContent;
-          button.disabled = false;
-          return;
-        }
+        // 不再强制要求设备密钥，因为后端有默认值
+        // 如果用户没有填写，将使用后端的默认设备密钥
       }
 
       try {
