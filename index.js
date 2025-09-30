@@ -2132,6 +2132,12 @@ const configPage = `
         document.getElementById('emailFrom').value = config.EMAIL_FROM || '';
         document.getElementById('emailFromName').value = config.EMAIL_FROM_NAME || '订阅提醒系统';
         document.getElementById('emailTo').value = config.EMAIL_TO || '';
+        document.getElementById('barkDeviceKey').value = config.BARK_DEVICE_KEY || '';
+        document.getElementById('barkServer').value = config.BARK_SERVER || '';
+        document.getElementById('barkSound').value = config.BARK_SOUND || '';
+        document.getElementById('barkIcon').value = config.BARK_ICON || '';
+        document.getElementById('barkGroup').value = config.BARK_GROUP || '';
+        document.getElementById('barkUrl').value = config.BARK_URL || '';
 
         // 加载农历显示设置
         document.getElementById('showLunarGlobal').checked = config.SHOW_LUNAR === true;
@@ -2533,6 +2539,12 @@ const api = {
             EMAIL_FROM: newConfig.EMAIL_FROM || '',
             EMAIL_FROM_NAME: newConfig.EMAIL_FROM_NAME || '',
             EMAIL_TO: newConfig.EMAIL_TO || '',
+            BARK_DEVICE_KEY: newConfig.BARK_DEVICE_KEY || '',
+            BARK_SERVER: newConfig.BARK_SERVER || '',
+            BARK_SOUND: newConfig.BARK_SOUND || '',
+            BARK_ICON: newConfig.BARK_ICON || '',
+            BARK_GROUP: newConfig.BARK_GROUP || '',
+            BARK_URL: newConfig.BARK_URL || '',
             ENABLED_NOTIFIERS: newConfig.ENABLED_NOTIFIERS || ['notifyx']
           };
 
@@ -2852,6 +2864,12 @@ async function getConfig(env) {
       EMAIL_FROM: config.EMAIL_FROM || '',
       EMAIL_FROM_NAME: config.EMAIL_FROM_NAME || '',
       EMAIL_TO: config.EMAIL_TO || '',
+      BARK_DEVICE_KEY: config.BARK_DEVICE_KEY || '',
+      BARK_SERVER: config.BARK_SERVER || '',
+      BARK_SOUND: config.BARK_SOUND || '',
+      BARK_ICON: config.BARK_ICON || '',
+      BARK_GROUP: config.BARK_GROUP || '',
+      BARK_URL: config.BARK_URL || '',
       ENABLED_NOTIFIERS: config.ENABLED_NOTIFIERS || ['notifyx']
     };
 
