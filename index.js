@@ -2636,6 +2636,22 @@ const api = {
 
           success = await sendEmailNotification(title, content, testConfig);
           message = success ? '邮件通知发送成功' : '邮件通知发送失败，请检查配置';
+        } else if (body.type === 'bark') {
+          const testConfig = {
+            ...config,
+            BARK_DEVICE_KEY: body.BARK_DEVICE_KEY,
+            BARK_SERVER: body.BARK_SERVER,
+            BARK_SOUND: body.BARK_SOUND,
+            BARK_ICON: body.BARK_ICON,
+            BARK_GROUP: body.BARK_GROUP,
+            BARK_URL: body.BARK_URL
+          };
+
+          const title = '测试通知';
+          const content = '这是一条测试通知，用于验证Bark通知功能是否正常工作。\n\n发送时间: ' + formatBeijingTime();
+
+          success = await sendBarkNotification(title, content, testConfig);
+          message = success ? 'Bark通知发送成功' : 'Bark通知发送失败，请检查配置';
         }
 
         return new Response(
