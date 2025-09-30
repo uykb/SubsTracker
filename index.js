@@ -3508,7 +3508,7 @@ async function sendBarkNotification(title, content, config) {
     }
 
     // 使用指定的默认服务器地址如果未配置
-    const barkServer = config.BARK_SERVER || 'https://bark-worker.uykb.workers.dev';
+    const barkServer = config.BARK_SERVER || 'https://api.day.app';
     
     console.log('[Bark] 开始发送通知到设备: ' + deviceKey);
 
