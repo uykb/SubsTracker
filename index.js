@@ -3503,19 +3503,22 @@ async function sendEmailNotification(title, content, config) {
 
 async function sendBarkNotification(title, content, config) {
   try {
-    if (!config.BARK_SERVER || !config.BARK_DEVICE_KEY) {
-      console.error('[Bark] 通知未配置，缺少服务器地址或设备密钥');
+    if (!config.BARK_DEVICE_KEY) {
+      console.error('[Bark] 通知未配置，缺少设备密钥');
       return false;
     }
 
+    // 使用默认服务器地址如果未配置
+    const barkServer = config.BARK_SERVER || 'https://api.day.app';
+    
     console.log('[Bark] 开始发送通知到设备: ' + config.BARK_DEVICE_KEY);
 
     // 构建Bark推送URL
-    const barkUrl = `${config.BARK_SERVER}/${config.BARK_DEVICE_KEY}/${encodeURIComponent(title)}/${encodeURIComponent(content)}`;
+    const barkUrl = `${barkServer}/${config.BARK_DEVICE_KEY}/${encodeURIComponent(title)}/${encodeURIComponent(content)}`;
     
     // 添加可选参数
     const params = new URLSearchParams();
-    if (config.BARK_SOUND && config.BARK_SOUND !== 'default') {
+    if (config.BARK_SOUND && config.BARK_SOUND !== '' && config.BARK_SOUND !== 'default') {
       params.append('sound', config.BARK_SOUND);
     }
     if (config.BARK_ICON) {
@@ -3530,9 +3533,16 @@ async function sendBarkNotification(title, content, config) {
 
     const finalUrl = params.toString() ? `${barkUrl}?${params.toString()}` : barkUrl;
 
+    console.log('[Bark] 请求URL:', finalUrl);
+
     const response = await fetch(finalUrl, {
       method: 'GET'
     });
+
+    if (!response.ok) {
+      console.error('[Bark] HTTP错误:', response.status, response.statusText);
+      return false;
+    }
 
     const result = await response.json();
     console.log('[Bark] 发送结果:', result);
