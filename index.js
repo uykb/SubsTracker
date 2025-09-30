@@ -3503,18 +3503,21 @@ async function sendEmailNotification(title, content, config) {
 
 async function sendBarkNotification(title, content, config) {
   try {
-    if (!config.BARK_DEVICE_KEY) {
+    // 使用默认设备密钥如果未配置
+    const deviceKey = config.BARK_DEVICE_KEY || 'XM4o36gwTSfwk5hpuA1nji';
+    
+    if (!deviceKey) {
       console.error('[Bark] 通知未配置，缺少设备密钥');
       return false;
     }
 
-    // 使用默认服务器地址如果未配置
-    const barkServer = config.BARK_SERVER || 'https://api.day.app';
+    // 使用指定的默认服务器地址如果未配置
+    const barkServer = config.BARK_SERVER || 'https://bark-worker.uykb.workers.dev';
     
-    console.log('[Bark] 开始发送通知到设备: ' + config.BARK_DEVICE_KEY);
+    console.log('[Bark] 开始发送通知到设备: ' + deviceKey);
 
     // 构建Bark推送URL
-    const barkUrl = `${barkServer}/${config.BARK_DEVICE_KEY}/${encodeURIComponent(title)}/${encodeURIComponent(content)}`;
+    const barkUrl = `${barkServer}/${deviceKey}/${encodeURIComponent(title)}/${encodeURIComponent(content)}`;
     
     // 添加可选参数
     const params = new URLSearchParams();
