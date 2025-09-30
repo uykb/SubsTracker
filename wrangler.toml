@@ -12,7 +12,6 @@ name = "subscription-manager-staging"
 # KV 命名空间配置
 [[kv_namespaces]]
 binding = "SUBSCRIPTIONS_KV"
-preview_id = "your-preview-kv-namespace-id"
 id = "949dbfe1e23249d2a2321c5188e533fc"
 
 # 定时任务配置 - 每天早上8点检查
